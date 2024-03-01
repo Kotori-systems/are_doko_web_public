@@ -1,0 +1,24 @@
+name: Deploy to Firebase Hosting on PR
+
+'on': pull_request
+
+jobs:
+  build_and_preview:
+    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo snap install flutter --classic
+      - run: flutter config --enable-web
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo VAPID_KEY=${{ secrets.VAPID_KEY }} >> .env
+      - name: Generate Freezed Files
+        run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter build web -t lib/main.dart --release
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+         repoToken: '${{ secrets.GITHUB_TOKEN }}'
+         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ARE_DOKO_WEB }}'
+         projectId: are-doko-web

@@ -1,0 +1,63 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    - always_declare_return_types
+    - always_use_package_imports
+    - avoid_bool_literals_in_conditional_expressions
+    - avoid_catching_errors
+    - avoid_dynamic_calls
+    - avoid_escaping_inner_quotes
+    - avoid_positional_boolean_parameters
+    - avoid_redundant_argument_values
+    - avoid_void_async
+    - await_only_futures
+    - cascade_invocations
+    - cast_nullable_to_non_nullable
+    - directives_ordering
+    - eol_at_end_of_file
+    - flutter_style_todos
+    - omit_local_variable_types
+    - parameter_assignments
+    - prefer_adjacent_string_concatenation
+    - prefer_asserts_with_message
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - prefer_int_literals
+    - prefer_interpolation_to_compose_strings
+    - prefer_single_quotes
+    - require_trailing_commas
+    - sort_child_properties_last
+    - type_annotate_public_apis
+    - unawaited_futures
+    - use_late_for_private_fields_and_variables
+    - use_raw_strings
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+
+analyzer:
+  exclude:
+    - "test/screen/*.mocks.dart"
+    - "lib/**.freezed.dart"
+    - "lib/**.g.dart"

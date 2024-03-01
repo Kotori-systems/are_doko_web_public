@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "922403344210",
+    "project_id": "are-doko-web",
+    "storage_bucket": "are-doko-web.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922403344210:android:0d1b4eb81ba3c5f8bd748b",
+        "android_client_info": {
+          "package_name": "com.example.are_doko_web"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922403344210-jsjrk9ot5csd16ai8s5hb1phqvbdddia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2e-MIVnd3-MDQml1OLVGUYuGMYF8nfSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922403344210-jsjrk9ot5csd16ai8s5hb1phqvbdddia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

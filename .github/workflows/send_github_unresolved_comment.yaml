@@ -1,0 +1,49 @@
+name: Send github unresolved comments to discord
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # 毎日午前8時に処理を実行する。(UTC指定)
+  #   - cron: "0 23 * * 0-6"
+  #push:
+    #branches:
+      #- main
+
+jobs:
+  run-go:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21.1"
+
+      - name: Install dependencies
+        run: go mod tidy
+        working-directory: .github/workflows/script
+
+      - name: test
+        run: mv .github/generated_summary_file.csv .github/workflows/script/generated_summary_file.csv
+
+      - name: Fetch GitHub unresolved comments and send Discord notification
+        run: go run send_github_unresolved_comment.go
+        working-directory: .github/workflows/script
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          HOURS_TO_CHECK: ${{ vars.HOURS_TO_CHECK_UNUPDATED_PULL_REQUEST }}
+
+      - name: Commit summarized comments file
+        run: |
+          mv .github/workflows/script/generated_summary_file.csv .github/generated_summary_file.csv
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add .github/generated_summary_file.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "update generated_summary_file"
+            git push
+          fi
